@@ -1,17 +1,18 @@
 <router-outlet></router-outlet>
 
-<mat-toolbar color="primary">
-  <span>My Application</span>
+<mat-toolbar>
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  <span>App Map</span>
 </mat-toolbar>
 
-<section>
-  <div class="example-label">Raised</div>
-  <div class="example-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
-    <button mat-raised-button disabled>Disabled</button>
-    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
-  </div>
-</section>
+<mat-drawer-container  style="height: 1200px;">
+
+  <mat-drawer #drawer mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p>Lorem, ipsum dolor sit amet consectetur.</p>
+  </mat-drawer>
+  <app-map></app-map>
+  
+</mat-drawer-container>
