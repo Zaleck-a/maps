@@ -1,18 +1,20 @@
 <mat-card>
     <mat-card-title>Google Maps</mat-card-title>
     <mat-card-content>
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
-            <agm-marker [latitude]="lat" [longitude]="lng">
+        <agm-map (mapClick)="addPointer($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">
+            <agm-marker *ngFor="let pointer of pointers; let i = index" 
+                        [latitude]="pointer.lat" 
+                        [longitude]="pointer.lng">
 
                 <agm-info-window>
-                    <strong style="color: black;">Titulo</strong>
+                    <strong style="color: black;">{{pointer.title}}</strong>
                     <p style="color: black;">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        {{pointer.desc}}
                     </p>
 
                     <div>
                         <button style="margin-right: 4px" mat-raised-button color="primary">Edit</button> 
-                        <button mat-raised-button color="warn">Delete</button>
+                        <button (click)="deletePointer(i)" mat-raised-button color="warn">Delete</button>
                     </div>
                 </agm-info-window>
 
