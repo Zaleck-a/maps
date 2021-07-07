@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Pointer } from 'src/app/classes/pointer.class';
 
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -13,7 +15,7 @@ export class MapComponent implements OnInit {
   lat = 51.678418;
   lng = 7.809007;
 
-  constructor() { 
+  constructor(private snackBar: MatSnackBar) { 
     const pointersStorage = localStorage.getItem('pointer');
     if(pointersStorage){
       this.pointers = JSON.parse(pointersStorage);
@@ -32,6 +34,10 @@ export class MapComponent implements OnInit {
     
     localStorage.setItem('pointer', JSON.stringify(this.pointers));
     this.saveStorage();
+
+    this.snackBar.open('Added pointer', 'Close', {
+      duration: 3000
+    });
   }
 
   saveStorage(){
@@ -41,6 +47,9 @@ export class MapComponent implements OnInit {
   deletePointer(index: number){
     this.pointers.splice(index, 1);
     this.saveStorage();
-  }
 
+    this.snackBar.open('Pointer removed', 'Close', {
+      duration: 3000
+    });
+  }
 }
